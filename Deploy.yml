@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-dp
+spec:
+  replicas: 4
+  minReadySeconds: 15
+selectors:
+  matchLabels:
+    app: myblue
+    strategy:
+      type: Rollingupdate
+      Rollingupdate:
+        maxsurge: 25%
+        maxUnavailable: 25%
+    template:
+      metadata:
+        labels:
+          app: myblue
+      spec:
+        containers:
+          - name: my-container
+            image: sravanthi2003/mycssimages:villa
+            ports:
+              - containerport: 80      
+        
